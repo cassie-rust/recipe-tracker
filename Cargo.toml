@@ -4,8 +4,20 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-axum = "0.6.20"
+anyhow = "1.0.79"
+axum = { version = "0.6.20", features = ["form"] }
+rand = "0.8.5"
+
+serde = { version = "1.0.195", features = ["serde_derive"] }
+serde_json = "1.0.111"
 shuttle-axum = "0.35.2"
 shuttle-runtime = "0.35.2"
-tokio = "1.28.2"
+shuttle-shared-db = { version = "0.35.2", features = ["postgres"] }
+sqlx = { version = "0.7", features = ["runtime-tokio-native-tls", "postgres"] }
+tokio = "1.28"
 tracing = "0.1.40"
+
+[dev-dependencies]
+axum = { features = ["macros"] }
+faux = "^0.1"
+rand = "0.8.5"

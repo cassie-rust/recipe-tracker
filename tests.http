@@ -1,0 +1,20 @@
+# A good recipe request
+POST http://localhost:8000/recipes HTTP/1.1
+content-type: application/json
+
+{
+  "name": "a title",
+  "book": {
+    "title": "a title"
+  }
+}
+
+###
+
+# A bad recipe request
+POST http://localhost:8000/recipes HTTP/1.1
+content-type: application/json
+
+{
+  "name": "a title",
+}
