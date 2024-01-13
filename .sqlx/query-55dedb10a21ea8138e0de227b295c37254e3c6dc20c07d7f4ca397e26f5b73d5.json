@@ -1,0 +1,24 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "WITH recipe_id AS (\n  INSERT INTO recipes (name)\n  VALUES ($1)\n  RETURNING id\n),\nurl_id AS (\n  INSERT INTO recipe_urls (name, url)\n  VALUES ($2, $3)\n  RETURNING id\n),\nurl_parts AS (\n  INSERT INTO recipe_parts (recipe, url)\n  SELECT recipe_id.id,\n    url_id.id\n  FROM recipe_id,\n    url_id\n)\nSELECT recipe_id.id\nFROM recipe_id",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Uuid"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Text",
+        "Text",
+        "Text"
+      ]
+    },
+    "nullable": [
+      false
+    ]
+  },
+  "hash": "55dedb10a21ea8138e0de227b295c37254e3c6dc20c07d7f4ca397e26f5b73d5"
+}

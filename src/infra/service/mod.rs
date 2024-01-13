@@ -1,8 +1,9 @@
 use std::sync::Arc;
 
-use crate::models::CreateRecipe;
+use sqlx::types::Uuid;
 
 use super::repository::DbRepo;
+use crate::models::CreateRecipe;
 
 #[derive(Clone)]
 pub struct DbService {
@@ -16,7 +17,7 @@ impl From<DbRepo> for DbService {
 }
 
 impl DbService {
-    pub async fn create_recipe(&self, recipe: CreateRecipe) -> Result<String, Arc<anyhow::Error>> {
+    pub async fn create_recipe(&self, recipe: CreateRecipe) -> Result<Uuid, Arc<anyhow::Error>> {
         self.repo.create_recipe(recipe).await
     }
 }

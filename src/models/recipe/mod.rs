@@ -11,9 +11,9 @@ use serde::{Deserialize, Deserializer, Serialize};
 /// Note that a CreateRecipe is invalid if it doesn't contain at least one of
 /// the optional fields
 pub struct CreateRecipe {
-    name: String,
-    book: Option<CreateRecipeBook>,
-    url: Option<CreateRecipeUrl>,
+    pub name: String,
+    pub book: Option<CreateRecipeBook>,
+    pub url: Option<CreateRecipeUrl>,
 }
 
 impl<'de> Deserialize<'de> for CreateRecipe {
@@ -84,14 +84,14 @@ impl<'de> Deserialize<'de> for CreateRecipe {
 
 #[derive(Debug, Serialize, Deserialize, Eq, PartialEq, Clone)]
 pub struct CreateRecipeBook {
-    title: String,
-    isbn: Option<Vec<u8>>,
+    pub title: String,
+    pub isbn: Option<String>,
 }
 
 #[derive(Debug, Serialize, Deserialize, Eq, PartialEq, Clone)]
 pub struct CreateRecipeUrl {
-    name: String,
-    url: String,
+    pub name: String,
+    pub url: String,
 }
 
 #[cfg(test)]
@@ -127,7 +127,7 @@ mod fixtures {
     }
 
     impl CreateRecipeBook {
-        pub fn fixture(title: &str, isbn: Option<Vec<u8>>) -> CreateRecipeBook {
+        pub fn fixture(title: &str, isbn: Option<String>) -> CreateRecipeBook {
             CreateRecipeBook {
                 title: title.to_string(),
                 isbn,

@@ -1,0 +1,24 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "WITH recipe_id AS (\n  INSERT INTO recipes (name)\n  VALUES ($1)\n  RETURNING id\n),\nbook_id AS (\n  INSERT INTO recipe_books (title, isbn)\n  VALUES ($2, $3)\n  RETURNING id\n),\nbook_parts AS (\n  INSERT INTO recipe_parts (recipe, book)\n  SELECT recipe_id.id,\n    book_id.id\n  FROM recipe_id,\n    book_id\n)\nSELECT recipe_id.id\nFROM recipe_id",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Uuid"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Text",
+        "Text",
+        "Text"
+      ]
+    },
+    "nullable": [
+      false
+    ]
+  },
+  "hash": "b22f10136246335cb21208ae3c587ae93f170922f1ab9ed32e669ebbcb3c1fae"
+}
